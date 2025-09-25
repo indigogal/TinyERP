@@ -38,29 +38,22 @@ public class Cliente {
     return Nombre;
   }
 
-  public int getHash() {
-    char[] nameArr = this.Nombre.toCharArray();
-
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.Nombre, this.creationTimestamp);
   }
 
-  // Usar solo en caso de que el profe nos de permiso de usar
-  // el algoritmo de hashing builtin
-  // @Override
-  // public int hashCode() {
-  // return Objects.hash(this.Nombre, this.creationTimestamp);
-  // }
-  //
-  // @Override
-  // public boolean equals(Object o) {
-  // if (this == o) {
-  // return true;
-  // }
-  // if (o == null || getClass() != o.getClass()) {
-  // return false;
-  // }
-  // Cliente clienteComparison = (Cliente) o;
-  // return Objects.equals(this.Nombre, clienteComparison.Nombre) &&
-  // Objects.equals(this.Saldo, clienteComparison.Saldo);
-  // }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Cliente clienteComparison = (Cliente) o;
+    return Objects.equals(this.Nombre, clienteComparison.Nombre) &&
+        Objects.equals(this.Saldo, clienteComparison.Saldo);
+  }
 
 }
