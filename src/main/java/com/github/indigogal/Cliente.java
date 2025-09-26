@@ -2,9 +2,6 @@ package com.github.indigogal;
 
 import java.util.Objects;
 
-/**
- * Cliente
- */
 public class Cliente {
   private String Nombre;
   private Integer Saldo;
@@ -12,10 +9,17 @@ public class Cliente {
   private int ID;
 
   public Cliente(String _Nombre, Integer _Saldo) {
-    this.Nombre = _Nombre;
+    this.Nombre = _Nombre.toUpperCase();
     this.Saldo = _Saldo;
     this.creationTimestamp = System.currentTimeMillis();
     this.ID = this.hashCode();
+  }
+
+  public Cliente(int id, String nombre, double saldo) {
+    this.ID = id;
+    this.Nombre = nombre.toUpperCase();
+    this.Saldo = (int) saldo;
+    this.creationTimestamp = System.currentTimeMillis();
   }
 
   public void setNombre(String nombre) {
@@ -31,6 +35,10 @@ public class Cliente {
   }
 
   public int getID() {
+    return ID;
+  }
+
+  public int getId() {
     return ID;
   }
 
@@ -56,4 +64,8 @@ public class Cliente {
         Objects.equals(this.Saldo, clienteComparison.Saldo);
   }
 
+  @Override
+  public String toString() {
+    return String.format("Cliente{ID=%d, Nombre='%s', Saldo=%d}", ID, Nombre, Saldo);
+  }
 }

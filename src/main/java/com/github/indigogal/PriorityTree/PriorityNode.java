@@ -1,17 +1,27 @@
 package com.github.indigogal.PriorityTree;
 
-/**
- * PriorityNode
- */
-public class PriorityNode {
-  int priority;
-  Tasks task;
-  int taskTime; // en segundos
-  PriorityNode ChildLeft;
-  PriorityNode ChildRight;
+import java.util.concurrent.CompletableFuture;
+import com.github.indigogal.PriorityTree.TaskStatus;
 
-  public PriorityNode(Tasks _task) {
+public class PriorityNode {
+  public int priority;
+  public int taskTime; // en segundos
+  public Tasks task;
+  public TaskStatus status;
+  public PriorityNode padre;
+  public PriorityNode ChildLeft;
+  public PriorityNode ChildRight;
+  public CompletableFuture<Void> executionFuture;
+  public long startTime;
+  public long endTime;
+  public int progress; // 0-100
+
+  public PriorityNode(Tasks _task, int priority, int taskTime) {
     this.task = _task;
+    this.padre = null;
+    this.status = TaskStatus.PENDING;
+    this.progress = 0;
+    this.executionFuture = null;
     determinePriority();
   }
 
@@ -59,4 +69,26 @@ public class PriorityNode {
         break;
     }
   }
+
+  public boolean isCompleted() {
+    return status == TaskStatus.COMPLETED || status == TaskStatus.FAILED;
+  }
+
+  public boolean isRunning() {
+    return status == TaskStatus.RUNNING;
+  }
+
+  public double getExecutionProgress() {
+    if (status == TaskStatus.PENDING)
+      return 0.0;
+    if (status == TaskStatus.COMPLETED)
+      return 100.0;
+    if (status == TaskStatus.RUNNING && startTime > 0) {
+      long elapsed = System.currentTimeMillis() - startTime;
+      double progress = Math.min(100.0, (elapsed / 1000.0 / taskTime) * 100.0);
+      return progress;
+    }
+    return 0.0;
+  }
+
 }

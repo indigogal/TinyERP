@@ -2,9 +2,6 @@ package com.github.indigogal;
 
 import java.util.Objects;
 
-/**
- * Venta
- */
 public class Venta {
   private Integer idCliente;
   private Integer valor;
@@ -17,6 +14,7 @@ public class Venta {
     this.valor = _valor;
     this.articulo = _articulo;
     this.creationTimestamp = System.currentTimeMillis();
+    this.saleID = this.hashCode(); 
   }
 
   public Integer getIdCliente() {
@@ -33,6 +31,10 @@ public class Venta {
 
   public int getSaleID() {
     return saleID;
+  }
+
+  public long getCreationTimestamp() {
+    return creationTimestamp;
   }
 
   @Override
@@ -52,5 +54,11 @@ public class Venta {
     return Objects.equals(this.idCliente, ventaComparison.getIdCliente())
         && Objects.equals(this.valor, ventaComparison.getValor())
         && Objects.equals(this.articulo, ventaComparison.getArticulo());
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Venta{ID=%d, Cliente=%d, Articulo='%s', Valor=%d}",
+        saleID, idCliente, articulo, valor);
   }
 }

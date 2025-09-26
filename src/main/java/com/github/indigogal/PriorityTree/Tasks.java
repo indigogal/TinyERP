@@ -1,6 +1,6 @@
 package com.github.indigogal.PriorityTree;
 
-enum Tasks { // prioridad | Tiempo en mins
+public enum Tasks { // prioridad | Tiempo en mins
   DEPURAR, // 5, 3
   RESPALDAR, // 8, 5
   PROBAR, // 7, 2
