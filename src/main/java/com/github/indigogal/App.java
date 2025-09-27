@@ -1,7 +1,6 @@
 package com.github.indigogal;
 
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 import com.github.indigogal.PriorityTree.Tasks;
 
@@ -12,28 +11,14 @@ public class App {
   private static Scanner scanner = new Scanner(System.in);
 
   public static void main(String[] args) {
-    // 1. Pre-carga de datos
-    System.out.println("Iniciando ERP System...");
-    clientesManager.precargar(); // Precarga 10 clientes
-    System.out.println("10 Clientes precargados.");
-
-    // 2. Pre-carga de 10 ventas usando los IDs de clientes existentes
-    precargarVentas(); // Precarga 10 ventas
-    System.out.println("10 Ventas precargadas.");
-
-    // 3. Agregar tareas al sistema de prioridad
+    clientesManager.precargar();
+    precargarVentas();
     precargarTareas();
     System.out.println("Tareas de sistema precargadas.");
 
-    // 4. Iniciar monitor de progreso
     sistemasManager.iniciarMonitorProgreso();
-
-    // 5. Iniciar la aplicación
     mainMenu();
-
-    // 6. Shutdown
     sistemasManager.shutdown();
-    System.out.println("ERP System Apagado. ¡Hasta pronto!");
   }
 
   private static void mainMenu() {

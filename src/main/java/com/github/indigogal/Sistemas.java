@@ -225,6 +225,7 @@ public class Sistemas {
     System.out.println("=== ESTADÍSTICAS DEL SISTEMA ===");
     System.out.println("Tareas en cola: " + contarNodos(arbol.origin));
     System.out.println("Tareas ejecutándose: " + runningTasks.size());
+    // Usamos operador ternario para hacer output del status de procesamiento
     System.out.println("Sistema procesando: " + (isProcessing ? "Sí" : "No"));
   }
 
